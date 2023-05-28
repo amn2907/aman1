@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class SimpleSearchEngine {
+    private List<String> documents;
+
+    public SimpleSearchEngine() {
+        documents = new ArrayList<>();
+    }
+
+    public void addDocument(String document) {
+        documents.add(document);
+    }
+
+    public List<String> search(String keyword) {
+        List<String> results = new ArrayList<>();
+
+        for (String document : documents) {
+            if (document.toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(document);
+            }
+        }
+
+        return results;
+    }
+
+    public static void main(String[] args) {
+        SimpleSearchEngine searchEngine = new SimpleSearchEngine();
+        Scanner scanner = new Scanner(System.in);
+
+        // Add some example documents
+        searchEngine.addDocument("The quick brown fox jumps over the lazy dog");
+        searchEngine.addDocument("Java is a popular programming language");
+        searchEngine.addDocument("Search engines help us find information quickly");
+
+        System.out.println("Simple Search Engine");
+        System.out.println("--------------------");
+
+        while (true) {
+            System.out.print("Enter a keyword to search (or 'exit' to quit): ");
+            String keyword = scanner.nextLine();
+
+            if (keyword.equalsIgnoreCase("exit")) {
+                System.out.println("Search engine exited.");
+                break;
+            }
+
+            List<String> results = searchEngine.search(keyword);
+
+            if (results.isEmpty()) {
+                System.out.println("No results found for the keyword '" + keyword + "'.");
+            } else {
+                System.out.println("Search results for the keyword '" + keyword + "':");
+                for (String result : results) {
+                    System.out.println("- " + result);
+                }
+            }
+
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
