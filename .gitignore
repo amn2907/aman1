@@ -1,24 +1,34 @@
-# Compiled class file
-*.class
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
-# Log file
-*.log
+public class CurrencyConverter {
+    public static void main(String[] args) {
+        // Define the exchange rates
+        Map<String, Double> exchangeRates = new HashMap<>();
+        exchangeRates.put("USD", 1.0);
+        exchangeRates.put("EUR", 0.85);
+        exchangeRates.put("GBP", 0.72);
+        exchangeRates.put("JPY", 110.23);
 
-# BlueJ files
-*.ctxt
+        Scanner scanner = new Scanner(System.in);
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+        // Get input from the user
+        System.out.print("Enter the amount: ");
+        double amount = scanner.nextDouble();
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+        System.out.print("Enter the source currency (e.g., USD, EUR, GBP, JPY): ");
+        String sourceCurrency = scanner.next().toUpperCase();
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+        System.out.print("Enter the target currency (e.g., USD, EUR, GBP, JPY): ");
+        String targetCurrency = scanner.next().toUpperCase();
+
+        // Convert the amount
+        double sourceRate = exchangeRates.get(sourceCurrency);
+        double targetRate = exchangeRates.get(targetCurrency);
+        double convertedAmount = amount * (targetRate / sourceRate);
+
+        // Print the result
+        System.out.println(amount + " " + sourceCurrency + " = " + convertedAmount + " " + targetCurrency);
+    }
+}
